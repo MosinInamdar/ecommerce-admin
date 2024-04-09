@@ -3,7 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const products = () => {
+export default function products() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios.get("/api/products").then((response) => {
@@ -74,6 +74,4 @@ const products = () => {
       </table>
     </Layout>
   );
-};
-
-export default products;
+}

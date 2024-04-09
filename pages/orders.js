@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const orders = () => {
+export default function orders() {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     axios.get("/api/orders").then((response) => {
@@ -24,7 +24,7 @@ const orders = () => {
         <tbody>
           {orders.length > 0 &&
             orders.map((order) => (
-              <tr>
+              <tr key={order._id}>
                 <td>{new Date(order.createdAt).toLocaleString()}</td>
                 <td className={order.paid ? "text-green-600" : "text-red-600"}>
                   {order.paid ? "YES" : "NO"}
@@ -54,6 +54,4 @@ const orders = () => {
       </table>
     </Layout>
   );
-};
-
-export default orders;
+}

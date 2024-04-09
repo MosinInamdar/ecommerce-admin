@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import { ReactSortable } from "react-sortablejs";
+import Image from "next/image";
 
 export default function ProductForm({
   _id,
@@ -103,11 +104,15 @@ export default function ProductForm({
       <select value={category} onChange={(ev) => setCategory(ev.target.value)}>
         <option value="">Uncategorized</option>
         {categories?.length > 0 &&
-          categories.map((c) => <option value={c._id}>{c.name}</option>)}
+          categories.map((c) => (
+            <option value={c._id} key={c._id}>
+              {c.name}
+            </option>
+          ))}
       </select>
       {propertiesToFill?.length > 0 &&
         propertiesToFill.map((p) => (
-          <div className="">
+          <div className="" key={p._id}>
             <label>{p.name[0].toUpperCase() + p.name.substring(1)}</label>
             <div>
               <select
@@ -115,7 +120,9 @@ export default function ProductForm({
                 onChange={(ev) => setProductProp(p.name, ev.target.value)}
               >
                 {p.value.map((v) => (
-                  <option value={v}>{v}</option>
+                  <option value={v} key={v}>
+                    {v}
+                  </option>
                 ))}
               </select>
             </div>
@@ -134,7 +141,7 @@ export default function ProductForm({
                 key={link}
                 className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200"
               >
-                <img src={link} alt="" className="rounded-lg" />
+                <Image src={link} alt="" className="rounded-lg" />
               </div>
             ))}
         </ReactSortable>
